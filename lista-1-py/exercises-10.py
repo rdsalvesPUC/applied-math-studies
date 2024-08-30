@@ -32,48 +32,59 @@ def isAlpha(entrada_dados):
             return True
 
 def parseStrToConjunto(string):
-    isAlpha(string)
-    # limpar os espaços em branco
-    # conver
+    valores = string.split(',')
+    conjunto = {int(valor) for valor in valores}
+
+    return conjunto
     
 def operacoes(option, conjuntoX, conjuntoY):
     match option:
         case 1:
-            uniao(conjuntoX, conjuntoY)
+            resultado = uniao(conjuntoX, conjuntoY)
+            resposta = "A união dos conjuntos resultou no conjunto: " + str(resultado)
         case 2:
-            intersecao(conjuntoX, conjuntoY)
+            resultado = intersecao(conjuntoX, conjuntoY)
+            resposta = "A interseção dos conjuntos resultou no conjunto: " + str(resultado)
         case 3:
-            diferenca(conjuntoX, conjuntoY)
+            resultado = diferenca(conjuntoX, conjuntoY)
+            resposta = "A diferença dos conjuntos resultou no conjunto: " + str(resultado)
         case 4:
-            produto_cartesiano(conjuntoX, conjuntoY)
-        case 5:
-            isSubconjunto(conjuntoX, conjuntoY)
+            resultado = produto_cartesiano(conjuntoX, conjuntoY)
+            resposta = "O Produto Cartesiano dos conjuntos resultou no conjunto: " + str(resultado)
         case 6:
-            isSubconjuntoProprio(conjuntoX, conjuntoY)
+            resultado = isSubconjuntoProprio(conjuntoX, conjuntoY)
+            resposta = "O Conjunto A é subconjunto do Conjunto B?: " + str(resultado)
+    
+    return resposta
 
 def main():
     while True:
-        option = input(print('Digite a opção desejada: '))
+        option = int(input('Digite a opção desejada: '))
 
         if option == 7:
             print('Finalizando o programa...')
             break
 
         if option in [1,2,3,4,5,6]:
-            stringX = input(print('Digite os valores para o conjunto A (separados por virgula)'))
-            stringY = input(print('Digite os valores para o conjunto B (separados por virgula)'))
+            stringX = input('Digite os valores para o conjunto A (separados por virgula)')
+            stringY = input('Digite os valores para o conjunto B (separados por virgula)')
         
         if isAlpha(stringX):
+            print('Não utilize letras, somente valores numéricos')
             break
         else:
             conjuntoX = parseStrToConjunto(stringX)
+            # print(conjuntoX)
             
         if isAlpha(stringY):
+            print('Não utilize letras, somente valores numéricos')
             break
         else:
             conjuntoY = parseStrToConjunto(stringY)
+            # print(conjuntoY)
 
-        
-        operacoes(option, conjuntoX, conjuntoY)
+        resposta = operacoes(option, conjuntoX, conjuntoY)
+
+        print(resposta)
                     
 main()
